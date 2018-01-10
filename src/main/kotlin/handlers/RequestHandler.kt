@@ -2,6 +2,7 @@ package handlers
 
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
+import config.YamlParser
 import mu.KLogging
 import java.io.IOException
 import java.nio.charset.Charset
@@ -33,8 +34,9 @@ class RequestHandler : HttpHandler {
 
     @Throws(IOException::class)
     private fun handleFile(httpExchange: HttpExchange?) : ByteArray {
-        val path = httpExchange?.requestURI?.path
-        val fullPath = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString() + path)
+        val path = if (httpExchange?.requestURI?.path.equals("/")) "/index.html" else httpExchange?.requestURI?.path
+        val root = YamlParser().parse().root
+        val fullPath = Paths.get(Paths.get(".").toAbsolutePath().normalize().toString() + root + path)
         return Files.readAllBytes(fullPath)
     }
 

@@ -2,6 +2,9 @@ buildscript {
     ext.kotlin_version = '1.2.10'
     ext.kotlin_logging_version = '1.4.7'
     ext.slf4j_version = '1.7.25'
+    ext.jackson_core = '2.7.1-1'
+    ext.jackson_module = '2.7.1-2'
+    ext.jackson_dataformat = '2.7.1'
 
     repositories {
         mavenCentral()
@@ -21,6 +24,9 @@ defaultTasks 'run'
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "io.github.microutils:kotlin-logging:$kotlin_logging_version"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jackson_core"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_module"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson_dataformat"
     runtime "org.slf4j:slf4j-simple:$slf4j_version"
 }
 
